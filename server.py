@@ -1182,9 +1182,6 @@ if __name__ == '__main__':
        _\ | | (_| | (__|   | (_) | |    |_      _|
        \__|_|\__,_|\___|_|\_\___/|_|      |_||_|
 \n"""
-    note = """
-⬡  Presented by n00py on behalf of Coalfire Labs R&D  ⬡
-             https://www.coalfire.com/
-             """
-    prompt.cmdloop(color(banner, "green") + color(note, "red")
+
+    prompt.cmdloop(color(banner, "green")
     + color("\nType \"modules\""" for additional information.", "green"))
