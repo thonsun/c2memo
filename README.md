@@ -34,8 +34,8 @@ This repo contains five files:
 
 To get started:
 
-- `go get github.com/Coalfire-Research/Slackor`
-- `cd $GOPATH/src/github.com/Coalfire-Research/Slackor`
+- `go get github.com/n00py/Slackor`
+- `cd $GOPATH/src/github.com/n00py/Slackor`
 - Run `install.sh`
 - Run `setup.py`
     - Supply the *OAuth Access Token* and *Bot User OAuth Access Token* from your app
