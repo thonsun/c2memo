@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/Coalfire-Research/Slackor/pkg/command"
 	"github.com/dustin/go-humanize"
+	"github.com/n00py/Slackor/pkg/command"
 )
 
 // List the files in the given directory

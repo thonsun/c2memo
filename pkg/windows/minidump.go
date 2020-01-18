@@ -9,8 +9,8 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/Coalfire-Research/Slackor/internal/slack"
-	"github.com/Coalfire-Research/Slackor/pkg/command"
+	"github.com/n00py/Slackor/internal/slack"
+	"github.com/n00py/Slackor/pkg/command"
 
 	"golang.org/x/sys/windows"
 )

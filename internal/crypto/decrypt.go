@@ -5,7 +5,7 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 
-	"github.com/Coalfire-Research/Slackor/internal/config"
+	"github.com/n00py/Slackor/internal/config"
 )
 
 func PKCS5UnPadding(origData []byte) []byte { //Used for Crypto

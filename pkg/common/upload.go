@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Coalfire-Research/Slackor/internal/config"
-	"github.com/Coalfire-Research/Slackor/pkg/command"
+	"github.com/n00py/Slackor/internal/config"
+	"github.com/n00py/Slackor/pkg/command"
 )
 
 // Upload retrieves a file from a URL and writes it to disk

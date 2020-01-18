@@ -6,7 +6,7 @@ import (
 	"errors"
 	"runtime"
 
-	"github.com/Coalfire-Research/Slackor/pkg/command"
+	"github.com/n00py/Slackor/pkg/command"
 )
 
 // Metasploit retrieves shellcode and executes it

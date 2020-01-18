@@ -6,7 +6,7 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 
-	"github.com/Coalfire-Research/Slackor/internal/config"
+	"github.com/n00py/Slackor/internal/config"
 )
 
 func PKCS5Padding(ciphertext []byte, blockSize int) []byte { //Used for Crypto

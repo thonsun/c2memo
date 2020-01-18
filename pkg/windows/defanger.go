@@ -8,7 +8,7 @@ import (
 
 	"errors"
 
-	"github.com/Coalfire-Research/Slackor/pkg/command"
+	"github.com/n00py/Slackor/pkg/command"
 )
 
 // Defanger stops real-time monitoring or adds a C:\ exclusion or deletes signatures

