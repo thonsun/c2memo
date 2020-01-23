@@ -11,8 +11,8 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"github.com/Coalfire-Research/Slackor/internal/config"
-	"github.com/Coalfire-Research/Slackor/internal/crypto"
+	"github.com/n00py/Slackor/internal/config"
+	"github.com/n00py/Slackor/internal/crypto"
 )
 
 // Upload sends a file to Slack, notifying the listener that a file is ready

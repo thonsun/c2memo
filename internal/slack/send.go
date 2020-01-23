@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Coalfire-Research/Slackor/internal/config"
-	"github.com/Coalfire-Research/Slackor/internal/crypto"
+	"github.com/n00py/Slackor/internal/config"
+	"github.com/n00py/Slackor/internal/crypto"
 )
 
 // SendResult sends a result back to the responses channel in Slack

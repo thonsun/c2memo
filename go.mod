@@ -1,4 +1,4 @@
-module github.com/Coalfire-Research/Slackor
+module github.com/n00py/Slackor
 
 go 1.12
 

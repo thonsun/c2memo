@@ -3,7 +3,7 @@ package common
 import (
 	"os/user"
 
-	"github.com/Coalfire-Research/Slackor/pkg/command"
+	"github.com/n00py/Slackor/pkg/command"
 )
 
 // WhoAmI returns the current user

@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Coalfire-Research/Slackor/internal/config"
+	"github.com/n00py/Slackor/internal/config"
 )
 
 func whoami() string { // returns the current user

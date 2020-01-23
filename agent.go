@@ -13,15 +13,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Coalfire-Research/Slackor/internal/config"
-	"github.com/Coalfire-Research/Slackor/internal/crypto"
-	"github.com/Coalfire-Research/Slackor/internal/slack"
-	"github.com/Coalfire-Research/Slackor/pkg/command"
+	"github.com/n00py/Slackor/internal/config"
+	"github.com/n00py/Slackor/internal/crypto"
+	"github.com/n00py/Slackor/internal/slack"
+	"github.com/n00py/Slackor/pkg/command"
 
-	_ "github.com/Coalfire-Research/Slackor/pkg/common"
-	_ "github.com/Coalfire-Research/Slackor/pkg/darwin"
-	_ "github.com/Coalfire-Research/Slackor/pkg/linux"
-	_ "github.com/Coalfire-Research/Slackor/pkg/windows"
+	_ "github.com/n00py/Slackor/pkg/common"
+	_ "github.com/n00py/Slackor/pkg/darwin"
+	_ "github.com/n00py/Slackor/pkg/linux"
+	_ "github.com/n00py/Slackor/pkg/windows"
 
 	"github.com/mattn/go-shellwords"
 )

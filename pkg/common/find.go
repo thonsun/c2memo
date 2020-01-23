@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Coalfire-Research/Slackor/pkg/command"
 	"github.com/bmatcuk/doublestar"
 	"github.com/dustin/go-humanize"
+	"github.com/n00py/Slackor/pkg/command"
 )
 
 // Find searches the current directory for the glob
