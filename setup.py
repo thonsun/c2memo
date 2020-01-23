@@ -84,6 +84,20 @@ if registration is None:
         print("Go to: Channel Settings -> Additional Options - > Delete this Channel")
         sys.exit()
 
+# Invite bot user to created channels
+data = {"token": token}
+r = requests.get('https://slack.com/api/users.list', headers=headers)
+result = json.loads(r.text)
+slackusers = []
+for user in result["members"]:
+    if user["is_bot"]:
+        slackusers.append(user["id"])
+for channel in [commands, responses, registration]:
+    data = {"token": token, "channel": channel, "users": ','.join(slackusers)}
+    r = requests.post('https://slack.com/api/conversations.invite', headers=headers, data=data)
+    print("Added bot account to channel " + channel)
+
+# If a database already exists, remove it
 try:
     os.remove('slackor.db')
     print("Deleting current database...")
