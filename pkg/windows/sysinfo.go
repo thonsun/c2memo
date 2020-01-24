@@ -54,7 +54,7 @@ func (s SysInfo) Name() string {
 // Run dumps general system info
 func (s SysInfo) Run(clientID string, jobID string, args []string) (string, error) {
 	stringy := "Hostname            :   " + hostname() + "\nCurrent User        :   " + whoami() +
-		"\nOS Version          :   " + getVersion() + "Go Environment      :   " +
+		"\nOS Version          :   " + getVersion() + "\nGo Environment      :   " +
 		string(runtime.GOARCH) + "\nCPU cores           :   " + strconv.Itoa(int(runtime.NumCPU()))
 	return stringy, nil
 }
