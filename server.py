@@ -886,7 +886,7 @@ class AgentCmd(Cmd):  # Class for all the modules when interacting with an agent
         print(color("Executing shellcode on: " + self.target, "blue"))
 
     def do_pyinject(self, args):
-        """PYINJECT - Executes a python script in memory.
+        """PYINJECT - Executes a python script in memory. (Python 2.7)
         Example: shellcode /tmp/script.py"""
         filepath = args
         pyinject(bearer, commands, self.target, filepath)
@@ -1156,7 +1156,7 @@ minidump - Returns a dump of lsass.exe to be process by mimikatz
 persist - Creates persistence by implanting a binary in an Alternate Data Stream.
           Can be activated by a scheduled task or via a run key.  Userland or Elevated.
            Usage: persist [registry|scheduler|wmi]
-pyinject - Executes a python script in memory.
+pyinject - Executes a python script in memory. (Python 2.7)
            Usage: pyinject [SERVER FILE PATH]
 samdump - Attempts to dump the SAM, SYSTEM and SECURITY files for offline hash extraction
            Usage: samdump

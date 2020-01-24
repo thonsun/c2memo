@@ -99,9 +99,9 @@ Use "interact [AGENT] to enter into an agent prompt.  Type "help" or press [TAB]
     - **screenshot** - Takes a screenshot of the desktop and retrieves it
     - **shellcode** - Executes x64 raw shellcode
 - Mac Commands
-    - **pyinject** - Executes a python script in memory
+    - **pyinject** - Executes a python script in memory (Python 2.7)
 - Linux Commands
-    - **pyinject** - Executes a python script in memory
+    - **pyinject** - Executes a python script in memory (Python 2.7)
     - **screenshot** - Takes a screenshot of the desktop and retrieves it
 
 #### OPSEC Considerations
