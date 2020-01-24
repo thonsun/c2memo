@@ -80,7 +80,7 @@ Use "interact [AGENT] to enter into an agent prompt.  Type "help" or press [TAB]
     - **beacon** - change the amount of time between each check-in by an agent (default is 5 seconds)
     - **download** - Download a file from the agent to the Slackor server
     - **help** - Displays help menu
-    - **kill** - Kill the agent 
+    - **kill** - Kill the agent
     - **sleep** - Cause the agent to sleep once (enter time in seconds)
     - **sysinfo** - Displays the current user, OS version, system architecture, and number of CPU cores
     - **upload** - Upload a file to the agent from the Slackor server
@@ -99,7 +99,9 @@ Use "interact [AGENT] to enter into an agent prompt.  Type "help" or press [TAB]
     - **screenshot** - Takes a screenshot of the desktop and retrieves it
     - **shellcode** - Executes x64 raw shellcode
 - Mac Commands
+    - **pyinject** - Executes a python script in memory
 - Linux Commands
+    - **pyinject** - Executes a python script in memory
     - **screenshot** - Takes a screenshot of the desktop and retrieves it
 
 #### OPSEC Considerations
