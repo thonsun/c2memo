@@ -5,6 +5,8 @@ package linux
 import (
 	"github.com/n00py/Slackor/internal/config"
 	"github.com/n00py/Slackor/pkg/command"
+	"io/ioutil"
+	"strings"
 )
 
 // Version gets the OS version
