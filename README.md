@@ -16,12 +16,17 @@ Setup
 For this to work you need:
 - A Slack Workspace
 - [Register an app](https://api.slack.com/apps) with the following permissions:
+
    Bot:
+   
     - **channels:history**
     - **channels:read**
     - **chat:write**
     - **users:read**
+    
+    
     User:
+    
     - **channels:history**
     - **channels:write**
     - **files:read:**
