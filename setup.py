@@ -18,9 +18,10 @@ if not os.path.exists("loot"):
 if not os.path.exists("output"):
     os.mkdir("output")
 
-print("Ensure your Slack app has these permissions before you continue:"
-      "\nchannels:history\nchannels:read\nchannels:write \nfiles:write:user\nfiles:read\n"
-      "You must also create a Slack bot")
+print("First you must also create a Slack bot.\n"
+    "Ensure your Slack app has these permissions before you continue:\nBot:\n"
+    "\nchannels:history\nchannels:read\nchannels:write \nchat:write:\nusers:read\n"
+    "User:\nchannels:history\nchannels:write\nfiles:read\nfiles:write")
 token = input("Enter the OAuth Access Token: ")
 bearer = input("Enter the Bot User OAuth Access Token: ")
 

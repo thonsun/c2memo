@@ -16,11 +16,16 @@ Setup
 For this to work you need:
 - A Slack Workspace
 - [Register an app](https://api.slack.com/apps) with the following permissions:
-    - **channels:read** 
-    - **channels:history** 	
-    - **channels:write** 	
-    - **files:write:user** 
-    - **files:read** 
+   Bot:
+    - **channels:history**
+    - **channels:read**
+    - **chat:write**
+    - **users:read**
+    User:
+    - **channels:history**
+    - **channels:write**
+    - **files:read:**
+    - **files:write**
 
 - Create a bot
 

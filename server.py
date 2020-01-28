@@ -157,7 +157,7 @@ def registration_monitor(bearer, registration, token, timestamp):  # Checks for 
     headers = {'Authorization': 'Bearer ' + bearer}
     data = {"channel": registration,
             "token": token, "oldest": timestamp}
-    r = requests.post('https://slack.com/api/channels.history', headers=headers, data=data)
+    r = requests.post('https://slack.com/api/conversations.history', headers=headers, data=data)
     result = json.loads(r.text)
     try:
         if result["error"]:  # Hit rate limit
@@ -261,7 +261,7 @@ def response_check(bearer, responses, token, timestamp):
     data = {"channel": responses,
             "token": token, "oldest": timestamp, }
     # This request gets the latest messages from the channel
-    r = requests.post('https://slack.com/api/channels.history', headers=headers, data=data)
+    r = requests.post('https://slack.com/api/conversations.history', headers=headers, data=data)
     # Parse the response
     try:
         result = json.loads(r.text)
