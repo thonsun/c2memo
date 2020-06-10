@@ -1,7 +1,7 @@
 # Slackor \#
-
+**
 Note: Given the countless high quality C2 frameworks available today, this project will no longer be actively maintained. (06/10/2020)
-
+**
 A Golang implant that uses Slack as a command and control channel.
 
 This project was inspired by [Gcat](https://github.com/byt3bl33d3r/gcat) and [Twittor](https://github.com/PaulSec/twittor). 
