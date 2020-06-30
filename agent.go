@@ -101,7 +101,7 @@ func getVersion() string {
 
 func CheckCommands(t, clientID string) { //This is the main thing, reads the commands channel and acts accordingly
 	client := &http.Client{}
-	URL := "https://slack.com/api/channels.history"
+	URL := "https://slack.com/api/conversations.history"
 	v := url.Values{}
 	v.Set("channel", config.CommandsChannel)
 	v.Set("token", config.Token)

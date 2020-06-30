@@ -33,7 +33,7 @@ print("Attempting to create Slack channels...")
 # Check if channels exist
 headers = {'Authorization': 'Bearer ' + bearer}
 data = {"token": token, "name": "commands", "validate": "True"}
-r = requests.get('https://slack.com/api/channels.list', headers=headers)
+r = requests.get('https://slack.com/api/conversations.list', headers=headers)
 result = json.loads(r.text)
 for channel in result["channels"]:
         if channel["name"] == "commands":
@@ -50,7 +50,7 @@ for channel in result["channels"]:
 headers = {'Authorization': 'Bearer ' + bearer}
 if commands is None:
     data = {"token": token, "name": "commands", "validate": "True"}
-    r = requests.post('https://slack.com/api/channels.create', headers=headers, data=data)
+    r = requests.post('https://slack.com/api/conversations.create', headers=headers, data=data)
     result = json.loads(r.text)
     try:
         commands = result["channel"]["id"]
@@ -59,11 +59,11 @@ if commands is None:
         print(result)
         print("Commands channel already exists, log into Slack and delete it manually")
         print("Go to: Channel Settings -> Additional Options - > Delete this Channel")
-        sys.exit()
+        #sys.exit()
 
 if responses is None:
     data = {"token": token, "name": "responses"}
-    r = requests.post('https://slack.com/api/channels.create', headers=headers, data=data)
+    r = requests.post('https://slack.com/api/conversations.create', headers=headers, data=data)
     result = json.loads(r.text)
     try:
         responses = result["channel"]["id"]
@@ -71,11 +71,11 @@ if responses is None:
     except KeyError:
         print("Responses channel already exists, log into Slack and delete it manually")
         print("Go to: Channel Settings -> Additional Options - > Delete this Channel")
-        sys.exit()
+        #sys.exit()
 
 if registration is None:
     data = {"token": token, "name": "registration"}
-    r = requests.post('https://slack.com/api/channels.create', headers=headers, data=data)
+    r = requests.post('https://slack.com/api/conversations.create', headers=headers, data=data)
     result = json.loads(r.text)
     try:
         registration = result["channel"]["id"]
@@ -83,7 +83,7 @@ if registration is None:
     except KeyError:
         print("Registration channel already exists, log into Slack and delete it manually")
         print("Go to: Channel Settings -> Additional Options - > Delete this Channel")
-        sys.exit()
+        #sys.exit()
 
 # Invite bot user to created channels
 data = {"token": token}
